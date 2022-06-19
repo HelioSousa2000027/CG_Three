@@ -1,76 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <head>
+        <title>three.js css3d - DrawingLines</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, 
+        minimum-scale=1.0, maximum-scale=1.0">
+        <style>
+            body {
+                background: #8686ca radial-gradient(ellipse at center, rgba(43, 45, 48, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            } 
+           
+            #topmenu {
+                position: absolute;
+                top: 15px;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+                text-align: center;
+            }
+            #menu {
+                position: absolute;
+                bottom: 20px;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+                text-align: center;
+            }
+            #title {
+                position: absolute;
+                top: 0px;
+                width: 100%;
+                padding: 0px;
+                box-sizing: content-box;
+                text-align: left;
+                color:rgb(246, 242, 242)
+            }                       
+            button {
+                color: rgb(255, 255, 255);
+                background: rgb(138, 156, 142);
+                border: 0px;
+                padding: 5px 10px;
+                margin: 2px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: rgb(1, 3, 29);
+                color: rgb(150, 222, 114);
+            }
+            button:active {
+                color: #000000;
+                background-color: rgb(85, 255, 0);
+            }
+            a:link {
+                color: rgb(60, 75, 151);
+            }
+            a:visited {
+            color: green;
+            }
+            a:hover {
+            color: hotpink;
+            }
+            a:active {
+            color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <div id="title" ><a href="https://three.org" target="_blank">three.js</a> css3d -
+            Drawing Lines
+        </div>
+        <div id="topmenu"> <button id="test"> Test </button> </div>
+        <script type="module">
+            // importado o modulo diretamente da web
+            import * as THREE from 'https://unpkg.com/three@0.129.0/build/three.module.js';
+            function main() {
+                const renderer = new THREE.WebGLRenderer();
+                renderer.setSize( window.innerWidth, window.innerHeight );
+                document.body.appendChild( renderer.domElement );
 
-<head>
-    <title>three.js css3d - DrawingLines</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="main.css">
-    <style>
-        body {
-            background-color: #0000ff4e;
-            background: radial-gradient(c at center, rgba(43, 45, 48, 1) 0%, rgba(0, 0, 0, 1) 100%); */
-        }
+                const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
+                camera.position.set( 0, 0, 100 );
+                camera.lookAt( 0, 0, 0 );
 
-        #topmenu {
-            position: absolute;
-            top: 5px;
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            text-align: center;
-            font-weight: bold;
-        }
+                const scene = new THREE.Scene();
+                //create a blue LineBasicMaterial
+                const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+                const material2 = new THREE.LineBasicMaterial( { color: 0xffffff } );                
+                const points = [];
+                points.push( new THREE.Vector3( -1, 10, 0 ) );
+                points.push( new THREE.Vector3( 0, 10, 0 ) );
+                points.push( new THREE.Vector3( 1, 10, 0 ) );
+                const geometry = new THREE.BufferGeometry().setFromPoints( points );
+                const points2 = [];
+                points2.push( new THREE.Vector3() );
+                points2.push( new THREE.Vector3( 10, 0, 0 ) );
+                points2.push( new THREE.Vector3( -10, 0, 0 ) );
+                points2.push( new THREE.Vector3( -10, 20, 0 ) ); 
+                points2.push( new THREE.Vector3( 10, 20, 0 ) ); 
+                points2.push( new THREE.Vector3( 10, 0, 0 ) ); 
+                const geometry2 = new THREE.BufferGeometry().setFromPoints( points2 );                
 
-        #menu {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        button {
-            color: rgb(255, 255, 255);
-            background: rgb(0, 0, 0, 1);
-            border: 0px;
-            padding: 5px 10px;
-            margin: 2px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: rgba(255, 255, 255, 1);
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-        }
-
-        button:active {
-            color: #000000;
-            background-color: rgb(85, 255, 0);
-        }
-
-    </style>
-</head>
-
-<body>
-    <div id="container"></div>
-    <div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> css3d - 
-        Drawing Lines</div>
-    <div id="topmenu">
-        <button id="test">Test</button>
-    </div>
-    <script type="module">
-        // Three.js - Fundamentals
-        // from https://threejs.org/manual/examples/fundamentals.html
-        // Alterado ligfeiramente para importar o Three.js através do site
-        import * as THREE from 'https://unpkg.com/three@0.129.0/build/three.module.js';
-        function main() {
-        }
-        main();
-    </script>
-</body>
+                const line = new THREE.Line( geometry, material );
+                const line2 = new THREE.Line( geometry2, material2 );
+                scene.add( line );
+                scene.add( line2 );
+                line.visible = true; // tornei invisivel a line
+                line2.visible = true; // tornei invisivel a line
+                function animate() {
+                    requestAnimationFrame( animate );
+                    line2.rotation.x += 0.01;
+                    line2.rotation.y += 0.01;
+                    line.rotation.x += 0.01;
+                    line.rotation.y += 0.01;
+                    line.rotation.y += 0.01;
+                    renderer.render( scene, camera );
+                }
+                animate();
+                
+            }
+            main();
+        </script>
+    </body>
 
 </html>
