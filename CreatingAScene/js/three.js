@@ -10791,7 +10791,7 @@
 	};
 
 	function WebGLBackground(renderer, cubemaps, state, objects, alpha, premultipliedAlpha) {
-		const clearColor = new Color(0x000000);
+		const clearColor = new Color(0x000000); // change color to yellow
 		let clearAlpha = alpha === true ? 0 : 1;
 		let planeMesh;
 		let boxMesh;

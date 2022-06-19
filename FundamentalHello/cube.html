@@ -36,13 +36,36 @@
 
       const material = new THREE.MeshBasicMaterial({color: 0x44aa88});  // greenish blue
 
-
       const cube = new THREE.Mesh(geometry, material);
       scene.add(cube);
+			
+      camera.position.z = 2;
+      
+      // função recursiva para rodar o cubo 
+      // function render(time) {
+      //   time *= 0.001;  // convert time to seconds
 
-      renderer.render(scene, camera);
-    }
-  main();
+      //   cube.rotation.x = time;
+      //   cube.rotation.y = time;
+
+      //   renderer.render(scene, camera);
+
+      //   requestAnimationFrame(render);
+      // }
+      // requestAnimationFrame(render);
+			
+      // função loop iterativo para rodar o cubo
+      function animate() {
+        requestAnimationFrame( animate );
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render( scene, camera );
+			}
+			animate();     
+      } 
+      main();
+
+
 
   </script>
 
