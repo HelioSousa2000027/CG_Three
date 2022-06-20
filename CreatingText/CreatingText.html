@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>three.js css3d - DrawingLines</title>
+        <title>three.js css3d - Creating Text</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, 
         minimum-scale=1.0, maximum-scale=1.0">
@@ -12,11 +12,11 @@
            
             #topmenu {
                 position: absolute;
-                top: 15px;
+                top: 30px;
                 width: 100%;
                 padding: 10px;
                 box-sizing: border-box;
-                text-align: center;
+                text-align: right;
             }
             #menu {
                 position: absolute;
@@ -26,15 +26,14 @@
                 box-sizing: border-box;
                 text-align: center;
             }
-            #title {
+            #info {
                 position: absolute;
-                top: 0px;
+                top: 10px;
                 width: 100%;
-                padding: 0px;
-                box-sizing: content-box;
-                text-align: left;
-                color:rgb(246, 242, 242)
-            }                       
+                text-align: center;
+                z-index: 100;
+                display:block;
+            }                      
             button {
                 color: rgb(255, 255, 255);
                 background: rgb(138, 156, 142);
@@ -68,7 +67,7 @@
     </head>
     <body>
         <div id="container"></div>
-        <div id="title" ><a href="https://three.org" target="_blank">three.js</a> css3d -
+        <div id="info" ><a href="https://three.org" target="_blank">three.js</a> css3d -
             Drawing Lines
         </div>
         <div id="topmenu"> <button id="test"> Test </button> </div>
@@ -89,9 +88,9 @@
                 const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
                 const material2 = new THREE.LineBasicMaterial( { color: 0xffffff } );                
                 const points = [];
-                points.push( new THREE.Vector3( -5, 10, 0 ) );
-                points.push( new THREE.Vector3( 0, 0, 0 ) );
-                points.push( new THREE.Vector3( 5, 10, 0 ) );
+                points.push( new THREE.Vector3( -1, 10, 0 ) );
+                points.push( new THREE.Vector3( 0, 10, 0 ) );
+                points.push( new THREE.Vector3( 1, 10, 0 ) );
                 const geometry = new THREE.BufferGeometry().setFromPoints( points );
                 const points2 = [];
                 points2.push( new THREE.Vector3() );
@@ -118,7 +117,7 @@
                     renderer.render( scene, camera );
                 }
                 animate();
-
+                
             }
             main();
         </script>
